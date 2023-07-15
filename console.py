@@ -1,13 +1,26 @@
 #!/usr/bin/python3
 
 import cmd
+
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    __classes = {"BaseModel"
-                 }
+    __classes = {"BaseModel",
+                 "User",
+                 "State",
+                 "City",
+                 "Amenity",
+                 "Place",
+                 "Review"}
 
     def do_quit(self, arg):
         """Exit the program"""
@@ -84,15 +97,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             all_instances = []
-
-            if len(args) == 0:
-                instances = storage.all().values()
-            else:
-                instances = [v for v in storage.all().values() if v.__class__.__name__ == args[0]]
-
-                for instance in instances:
+            instances = storage.all().values()
+            for instance in instances:
+                if len(args) > 0 and args[0] == instance.__class.__name__:
                     all_instances.append(str(instance))
-                print(all_instances)
+                elif len(args) == 0:
+                    all_instances.append(str(instance))
+            print(all_instances)
 
     def do_update(self, arg):
         """
@@ -131,7 +142,7 @@ class HBNBCommand(cmd.Cmd):
                         setattr(instance, attr_name, attr_value)
                     else:
                         setattr(instance, attr_name, attr_value)
-                        storage.save()
+                    storage.save()
 
 
 
