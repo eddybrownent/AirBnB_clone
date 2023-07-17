@@ -7,16 +7,11 @@ from datetime import datetime
 from models import storage
 import uuid
 
-<<<<<<< HEAD
-=======
 
 class BaseModel:
     """
     THis class that other classes will inherit from
     """
->>>>>>> 1143054 (pycodestyle and output errors fixing)
-
-class BaseModel:
     def __init__(self, *args, **kwargs):
         """
         Initializes an instance of the BaseModel class
@@ -27,7 +22,6 @@ class BaseModel:
         """
         if kwargs != {} and kwargs is not None:
             for key in kwargs:
-<<<<<<< HEAD
                 if key == "created_at":
                     self.__dict__["created_at"] = datetime.strptime(
                         kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
@@ -36,14 +30,12 @@ class BaseModel:
                     self.__dict__["updated_at"] = datetime.strptime(
                         kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
                     )
-=======
                 if key == 'created_at':
                     self.__dict__['created_at'] = datetime.strptime(
                             kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
                 elif key == 'updated_at':
                     self.__dict__['updated_at'] = datetime.strptime(
                             kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
->>>>>>> 1143054 (pycodestyle and output errors fixing)
                 else:
                     self.__dict__[key] = kwargs[key]
         else:
@@ -53,16 +45,12 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-<<<<<<< HEAD
-        return "[{}]({}){}".format(type(self).__name__, self.id, self.__dict__)
-=======
         """
         Returns:
             string containing the class name, instance ID, and attribute dict
         """
         return "[{}] ({}) {}".format(
                 type(self).__name__, self.id, self.__dict__)
->>>>>>> 1143054 (pycodestyle and output errors fixing)
 
     def save(self):
         """
@@ -72,15 +60,12 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-<<<<<<< HEAD
-=======
         """
         converts the Basemodel instance to a dictiobary
 
         Returns:
             dictinary rep of the instance
         """
->>>>>>> 1143054 (pycodestyle and output errors fixing)
         obj_dict = self.__dict__.copy()
         obj_dict["__class__"] = type(self).__name__
         obj_dict["created_at"] = obj_dict["created_at"].isoformat()
