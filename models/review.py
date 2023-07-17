@@ -2,8 +2,8 @@
 
 from models.base_model import BaseModel
 
-class Review(BaseModel):
 
-    place_id = ''
-    use_id = ''
-    text = ''
+class Review(BaseModel):
+    place_id = ""
+    use_id = ""
+    text = ""
