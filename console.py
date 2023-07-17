@@ -4,7 +4,10 @@ import cmd
 
 from models.base_model import BaseModel
 from models import storage
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1c77a714ceae08d82366fe229a0f7d3ebe65dbef
 # from models.user import User
 # from models.state import State
 # from models.city import City
@@ -15,7 +18,12 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
+<<<<<<< HEAD
     __classes = {"BaseM", "Usr", "St", "City", "Amenity", "Place", "Review"}
+=======
+    __classes = {"BaseModel", "User", "State", "City", "Amenity",
+                 "Place", "Review"}
+>>>>>>> 1c77a714ceae08d82366fe229a0f7d3ebe65dbef
 
     def do_quit(self, arg):
         """Exit the program"""
