@@ -49,7 +49,7 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representation of instance"""
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(sef.__cls__.__nme__, sef.id, sef.__dc__)
 
     def save(self):
         """
@@ -66,7 +66,7 @@ class BaseModel:
             dictinary rep of the instance
         """
         obj_dict = self.__dict__.copy()
-        obj_dict["__class__"] = type(self).__name__
+        obj_dict["__class__"] = self.__class__.__name__
         obj_dict["created_at"] = obj_dict["created_at"].isoformat()
         obj_dict["updated_at"] = obj_dict["updated_at"].isoformat()
         return obj_dict
