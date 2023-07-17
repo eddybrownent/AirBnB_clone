@@ -13,19 +13,13 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb) '
-    __classes = {"BaseModel",
-                 "User",
-                 "State",
-                 "City",
-                 "Amenity",
-                 "Place",
-                 "Review"}
+    prompt = "(hbnb) "
+    __classes = {"BaseModel", "User", "State", "City", "Amenity", "Place", "Review"}
 
     def do_quit(self, arg):
         """Exit the program"""
         return True
-    
+
     def do_EOF(self, arg):
         """Exit the program"""
         return True
@@ -55,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = arg.split()
         obj_dict = storage.all()
-        
+
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in self.__classes:
@@ -65,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
         elif "{}.{}".format(args[0], args[1]) not in obj_dict:
             print("** no instance found **")
         else:
-            print(obj_dict['{}.{}'.format(args[0], args[1])])
+            print(obj_dict["{}.{}".format(args[0], args[1])])
 
     def do_destroy(self, arg):
         """
@@ -80,10 +74,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        elif '{}.{}'.format(args[0], args[1]) not in obj_dict:
+        elif "{}.{}".format(args[0], args[1]) not in obj_dict:
             print("** no instance found **")
         else:
-            del obj_dict['{}.{}'.format(args[0], args[1])]
+            del obj_dict["{}.{}".format(args[0], args[1])]
             storage.save()
 
     def do_all(self, arg):
@@ -124,8 +118,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 instance_id = args[1]
                 instances = storage.all()
-                
-                instance_key = '{}.{}'.format(class_name, instance_id)
+
+                instance_key = "{}.{}".format(class_name, instance_id)
                 if instance_key not in instances:
                     print("** no instance found **")
                 elif len(args) == 2:
@@ -135,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     attr_name = args[2]
                     attr_value = args[3]
-                    attr_value = attr_value.replace('"', '')
+                    attr_value = attr_value.replace('"', "")
                     instance = instances[instance_key]
 
                     if hasattr(instance, attr_name):
@@ -145,14 +139,5 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
 
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
