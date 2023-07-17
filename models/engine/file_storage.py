@@ -50,8 +50,8 @@ class FileStorage:
 
         with open(self.__file_path, "r", encoding="utf-8") as file:
             serializ_objects = json.load(file)
-            reconstructed_objects = {
-                key: self.classes()[serializ_obj["__class__"]](**serializ_obj)
+            reconstructed_objects = {              
+            key: self.classes()[serializ_obj["__class__"]](**serializ_obj)
                 for key, serializ_obj in serializ_objects.items()
             }
             FileStorage.__objects = reconstructed_objects
