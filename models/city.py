@@ -7,10 +7,6 @@ from models.base_model import BaseModel
 
 
 class City(BaseModel):
-<<<<<<< HEAD
-    state_id = ""
-    name = ""
-=======
     """
     A class representing a City
     Attributes:
@@ -19,4 +15,3 @@ class City(BaseModel):
     """
     state_id = ''
     name = ''
->>>>>>> 1143054 (pycodestyle and output errors fixing)

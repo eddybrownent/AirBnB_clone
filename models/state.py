@@ -7,9 +7,6 @@ from models.base_model import BaseModel
 
 
 class State(BaseModel):
-<<<<<<< HEAD
-    name = ""
-=======
     """
     This class represents a State
 
@@ -17,4 +14,3 @@ class State(BaseModel):
         name (str): the name of the State
     """
     name = ''
->>>>>>> 1143054 (pycodestyle and output errors fixing)

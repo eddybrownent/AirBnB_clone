@@ -7,12 +7,6 @@ from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-<<<<<<< HEAD
-    city_id = ""
-    user_id = ""
-    name = ""
-    description = ""
-=======
     """
     This class represents a Place
     """
@@ -20,7 +14,6 @@ class Place(BaseModel):
     user_id = ''
     name = ''
     description = ''
->>>>>>> 1143054 (pycodestyle and output errors fixing)
     number_rooms = 0
     number_bathrooms = 0
     max_guest = 0

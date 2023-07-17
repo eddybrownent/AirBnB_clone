@@ -8,11 +8,6 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-<<<<<<< HEAD
-    place_id = ""
-    use_id = ""
-    text = ""
-=======
     """
     This class represents a Review
 
@@ -24,4 +19,3 @@ class Review(BaseModel):
     place_id = ''
     use_id = ''
     text = ''
->>>>>>> 1143054 (pycodestyle and output errors fixing)

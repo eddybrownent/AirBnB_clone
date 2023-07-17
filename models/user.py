@@ -20,4 +20,3 @@ class User(BaseModel):
     password = ''
     first_name = ''
     last_name = ''
->>>>>>> 1143054 (pycodestyle and output errors fixing)
