@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This script contains the entry point of command interpreter
+"""
 
 import cmd
 
