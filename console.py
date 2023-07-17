@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This script contains the entry point of command interpreter
+"""
 
 import cmd
 
@@ -17,6 +20,9 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    Class for the command line interpreter
+    """
     prompt = "(hbnb) "
 <<<<<<< HEAD
     __classes = {"BaseM", "Usr", "St", "City", "Amenity", "Place", "Review"}
