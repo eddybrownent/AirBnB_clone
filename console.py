@@ -13,6 +13,9 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
+    """
+    Class for the command line interpreter
+    """
     prompt = "(hbnb) "
     __classes = {"BaseModel", "User", "State", "City", "Amenity",
                  "Place", "Review"}
