@@ -4,7 +4,6 @@ This script contains the entry point of command interpreter
 """
 
 import cmd
-
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -95,17 +94,20 @@ class HBNBCommand(cmd.Cmd):
         based or not on the class name
         """
         args = arg.split()
+        objects = storage.all()
+        new_list = []
 
-        if len(args) > 0 and args[0] not in HBNBCommand.__classes:
+        if len(args) == 0:
+            for obj in objects.values():
+                new_list.append(obj.__str__())
+            print(new_list)
+        elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            all_instances = []
-            for instance in storage.all().values():
-                if len(args) > 0 and args[0] == instance.__class.__name__:
-                    all_instances.append(instance.__str__())
-                elif len(args) == 0:
-                    all_instances.append(instance.__str__())
-            print(all_instances)
+            for obj in objects.values():
+                if obj.__class__.__name__ == args[0]:
+                    new_list.append(obj.__str__())
+            print(new_list)
 
     def do_update(self, arg):
         """

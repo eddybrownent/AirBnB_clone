@@ -3,6 +3,13 @@
 import os
 import json
 import datetime
+from models.base_model import BaseModel
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 
 
 class FileStorage:
@@ -33,36 +40,18 @@ class FileStorage:
         with open(self.__file_path, "w", encoding="utf-8") as file:
             json.dump(serialized_objects, file)
 
-    def classes(self):
-        """Returns a dictionary of valid classes and their references"""
-        from models.base_model import BaseModel
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
-
-        classes = {
-            "BaseModel": BaseModel,
-            "User": User,
-            "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Place": Place,
-            "Review": Review,
-        }
-        return classes
-
     def reload(self):
         """
         Deserializes a JSON file to __objects
         """
-        if not os.path.isfile(FileStorage.__file_path):
-            return
+        try:
+            with open(FileStorage.__file_path, mode='r') as file:
+                new_dict = json.load(file)
 
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
-            serialize_objects = json.load(file)
-            serialize_objects = {key: self.classes()[val["__class__"]](**val)
-                        for key, val in serialize_objects.items()}
-            FileStorage.__objects = serialize_objects
+            for key, val in new_dict.items():
+                class_name = val.get('__class__')
+                obj = eval(class_name + '(**val)')
+                FileStorage.__objects[key] = obj
+
+        except FileNotFoundError:
+            pass
