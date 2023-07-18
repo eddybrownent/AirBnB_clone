@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-
-import os
+"""
+FileStorage  module class
+"""
 import json
-import datetime
 from models.base_model import BaseModel
 from models.user import User
 from models.amenity import Amenity
@@ -13,6 +13,9 @@ from models.state import State
 
 
 class FileStorage:
+    """
+    Class for serializtion and deserialization of base classes
+    """
     __file_path = "file.json"
     __objects = {}
 
@@ -26,8 +29,9 @@ class FileStorage:
         """
         sets in __objects with key
         """
-        key = "{}.{}".format(type(obj).__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        if obj:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            FileStorage.__objects[key] = obj
 
     def save(self):
         """
