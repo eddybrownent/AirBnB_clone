@@ -21,7 +21,7 @@ class BaseModel:
             *args: Variable-length argument list
             **kwargs: keyword arguments
         """
-        if kwargs:
+        if kwargs is not None and kwargs ! = {}:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
