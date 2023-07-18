@@ -24,7 +24,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-        sets in __objects with key 
+        sets in __objects with key
         """
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
