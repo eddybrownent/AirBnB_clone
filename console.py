@@ -4,7 +4,6 @@ This script contains the entry point of command interpreter
 """
 
 import cmd
-
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -21,7 +20,8 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    __classes = {"BaseModel", "User", "State", "City", "Amenity", "Place", "Review"}
+    __classes = {"BaseModel", "User", "State", "City",
+                 "Amenity", "Place", "Review"}
 
     def do_quit(self, arg):
         """Exit the program"""
@@ -36,6 +36,7 @@ class HBNBCommand(cmd.Cmd):
         cmd.Cmd.do_help(self, arg)
 
     def emptyline(self):
+        """do nothing when ENTER Is hit"""
         pass
 
     def do_create(self, arg):
@@ -98,12 +99,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             all_instances = []
-            instances = storage.all().values()
-            for instance in instances:
-                if len(args) > 0 and args[0] == all_instances.__class.__name__:
-                    all_instances.append(str(instance))
+            for instance in storage.all().values():
+                if len(args) > 0 and args[0] == instance.__class.__name__:
+                    all_instances.append(instance.__str__())
                 elif len(args) == 0:
-                    all_instances.append(str(instance))
+                    all_instances.append(instance.__str__())
             print(all_instances)
 
     def do_update(self, arg):
@@ -115,34 +115,50 @@ class HBNBCommand(cmd.Cmd):
 
         if len(args) == 0:
             print("** class name missing **")
+            return
+
+        class_name = args[0]
+
+        if class_name not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+
+        instance_id = args[1]
+        instances = storage.all()
+        instance_key = "{}.{}".format(class_name, instance_id)
+
+        if instance_key not in instances:
+            print("** no instance found **")
+            return
+
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+
+        if len(args) == 3:
+            print("** value missing **")
+            return
+
+        attr_name = args[2]
+        attr_value = args[3]
+
+        if attr_name == "id" or attr_name == "created_at" or \
+                attr_name == "updated_at":
+            return
+
+        attr_value = attr_value.replace('"', "")
+        instance = instances[instance_key]
+
+        if hasattr(instance, attr_name):
+            setattr(instance, attr_name, attr_value)
         else:
-            class_name = args[0]
+            setattr(instance, attr_name, attr_value)
 
-            if class_name not in HBNBCommand.__classes:
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
-            else:
-                instance_id = args[1]
-                instances = storage.all()
+        storage.save()
 
-                instance_key = "{}.{}".format(class_name, instance_id)
-                if instance_key not in instances:
-                    print("** no instance found **")
-                elif len(args) == 2:
-                    print("** attribute name missing **")
-                elif len(args) == 3:
-                    print("** value missing **")
-                else:
-                    attr_name = args[2]
-                    attr_value = args[3]
-                    attr_value = attr_value.replace('"', "")
-                    instance = instances[instance_key]
-
-                    if hasattr(instance, attr_name):
-                        setattr(instance, attr_name, attr_value)
-                    else:
-                        setattr(instance, attr_name, attr_value)
-                    storage.save()
-
-
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
