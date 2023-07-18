@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             all_instances = []
             instances = storage.all().values()
             for instance in instances:
-                if len(args) > 0 and args[0] == instance.__class.__name__:
+                if len(args) > 0 and args[0] == all_instances.__class.__name__:
                     all_instances.append(str(instance))
                 elif len(args) == 0:
                     all_instances.append(str(instance))
