@@ -10,13 +10,23 @@ class FileStorage:
     __objects = {}
 
     def all(self):
+        """
+        returns  dictionary __objects
+        """
         return FileStorage.__objects
 
     def new(self, obj):
+        """
+        sets in __objects with key 
+        """
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
+        """
+        Serializes __objects
+        to the JSON file
+        """
         serialized_objects = {}
         for key, obj in self.__objects.items():
             serialized_objects[key] = obj.to_dict()
@@ -45,12 +55,14 @@ class FileStorage:
         return classes
 
     def reload(self):
+        """
+        Deserializes a JSON file to __objects
+        """
         if not os.path.isfile(FileStorage.__file_path):
             return
 
-        with open(self.__file_path, "r", encoding="utf-8") as file:
-            serializ_objects = json.load(file)
-            reconstructed_objects = {              
-            key: self.classes()[serializ_obj["__class__"]](**serializ_obj)
-                for key, serializ_obj in serializ_objects.items()}
-            FileStorage.__objects = reconstructed_objects
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
+            serialize_objects = json.load(file)
+            serialize_objects = {key: self.classes()[val["__class__"]](**val)
+                        for key, val in serialize_objects.items()}
+            FileStorage.__objects = serialize_objects

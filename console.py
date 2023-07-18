@@ -4,6 +4,7 @@ This script contains the entry point of command interpreter
 """
 
 import cmd
+
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -159,7 +160,6 @@ class HBNBCommand(cmd.Cmd):
             setattr(instance, attr_name, attr_value)
 
         storage.save()
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
