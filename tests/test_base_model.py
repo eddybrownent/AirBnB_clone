@@ -8,7 +8,7 @@ import os
 import models
 
 
-class test_basemodel(unittest.TestCase):
+class test_BaseModel(unittest.TestCase):
     """ """
 
     def __init__(self, args, **kwargs):
@@ -18,7 +18,7 @@ class test_basemodel(unittest.TestCase):
 
     def setUp(self):
         """ """
-        pass
+        self.model_instance = BaseModel()
 
     def test_id(self):
         """ """
@@ -37,3 +37,6 @@ class test_basemodel(unittest.TestCase):
         k = new.to_dict()
         new = BaseModel(**k)
         self.asserFalse(new.created_at == new.updated_at)
+
+if __name__ == '__main__':
+    unittest.main()
