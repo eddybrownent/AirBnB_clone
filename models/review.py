@@ -2,8 +2,6 @@
 """
 This script defines a Review class
 """
-
-
 from models.base_model import BaseModel
 
 

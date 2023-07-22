@@ -2,7 +2,6 @@
 """
 This script defines a City class inheriting BaseModel
 """
-
 from models.base_model import BaseModel
 
 

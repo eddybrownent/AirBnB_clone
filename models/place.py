@@ -2,7 +2,6 @@
 """
 This script defines the Place class
 """
-
 from models.base_model import BaseModel
 
 
